@@ -1,12 +1,10 @@
 class Node{
- private int data;
+ private Integer data;
  private Node next,prev;
- public Node(int num){
+ public Node(Integer num){
    data = num;
- }
- public Node(int num, Node first){
-   data = num;
-   next = first;
+   next = null;
+   prev = null;
  }
  public Node(int num, Node first, Node second){
    data = num;
@@ -17,23 +15,25 @@ class Node{
 }
 
 class MyLinkedList{
- private int size;
+ private int length;
  private Node start,end;
 
- public MyLinkedList(int len, Node strt, Node nd){
-   size = len;
-   start = strt;
-   end = nd;
+ public MyLinkedList(){
+   length = 0;
+   start = null;
+   end = null;
  }
-
- public int size(){
-   int siz = 1;
-   while(this.start.next != null){
-     siz++;
+ public boolean add(Integer value){
+   if(end == null && start == null){
+     end = Node(value);
+     length = 1;
+   }
+   else{
+     this.end.next = Node(value);
+     this.end = this.end.next;
+     length++;
    }
  }
-
-
- public boolean add(int value);
+ public int size();
  public String toString();
 }
