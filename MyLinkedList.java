@@ -13,14 +13,27 @@ class Node{
    next = first;
    prev = second;
  }
- 
+
 }
 
 class MyLinkedList{
  private int size;
  private Node start,end;
 
- public int size();
+ public MyLinkedList(int len, Node strt, Node nd){
+   size = len;
+   start = strt;
+   end = nd;
+ }
+
+ public int size(){
+   int siz = 1;
+   while(this.start.next != null){
+     siz++;
+   }
+ }
+
+
  public boolean add(int value);
  public String toString();
 }
