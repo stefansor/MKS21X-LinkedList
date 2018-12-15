@@ -14,22 +14,46 @@ class Node{
  public Node next(){
    return this.next;
  }
- public Node setNext(Integer newnum){
-   Integer olnum = this.next.data;
+ public Node setNext(Node newnd){
+   if(this.next == null){
+     this.next = newnd;
+     this.next.prev = this;
+     return null;
+   }
+   Node olnum = this.next;
    this.next.prev = null;
-   this.next = Node(newnum);
+   this.next = newnd;
    this.next.prev = this;
    return olnum;
  }
  public Node prev(){
    return this.prev;
  }
- public Node setPrev(Integer newnum){
-   Integer olnum = this.prev.data;
+ public Node setPrev(Node newnum){
+   if(this.prev == null){
+     this.prev = newnum;
+     this.prev.next = this;
+     return null;
+   }
+   Node olnum = this.prev;
    this.prev.next = null;
-   this.prev = Node(newnum);
+   this.prev = newnum;
    this.prev.next = this;
    return olnum;
+ }
+
+ public Integer getData(){
+   return this.data;
+ }
+
+ public Integer setData(Integer i){
+   int ol = this.data;
+   this.data = i;
+   return ol;
+ }
+ public String toString(){
+   String str = "" + this.data;
+   return str;
  }
 
 }
@@ -46,17 +70,19 @@ class MyLinkedList{
 
  public boolean add(Integer value){
    if(end == null && start == null){
-     Node(value, null, null);
+     this.end = new Node(value, null, null);
+     this.start = this.end;
      length = 1;
-     return truep;
+     return true;
    }
    else{
-     this.end.setNext(Node(value, null, this));
-     this.end = this.end.next;
+     Node newnod = new Node(value, null, this.end);
+     this.end.setNext(newnod);
+     this.end.setNext(newnod);
+     this.end = newnod;
      length++;
      return true;
    }
-   return false;
  }
 
  public int size(){
@@ -67,11 +93,11 @@ class MyLinkedList{
   Node current = this.start;
   for(int i = 0; i < this.size(); i++){
     if(i == this.size() - 1){
-      str = str + current.data + "]";
+      str = str + current.getData() + "]";
     }
     else{
-     str = str + current.data + ", ";
-     current = current.next;
+     str = str + current.getData() + ", ";
+     current = current.next();
    }
   }
   return str;
@@ -80,10 +106,13 @@ class MyLinkedList{
 
 }
 
-public class Driver{
+class Driver{
  public static void main(String[] args){
+   Node first = new Node(9, null, null);
+   System.out.println(first );
    MyLinkedList lst = new MyLinkedList();
    lst.add(9);
+   lst.add(10);
    System.out.println(lst);
  }
 }
