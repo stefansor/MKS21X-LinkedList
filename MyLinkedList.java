@@ -116,6 +116,25 @@ class MyLinkedList{
  public Integer get(int index){
    return this.getnthNode(index).getData();
  }
+ public Integer set(int index, Integer value){
+  Integer ol = this.getnthNode(index).getData();
+  this.getnthNode(index).setData(value);
+  return ol;
+}
+public boolean contains(Integer value){
+  boolean in = false;
+  int cur = 0;
+  Node current = this.start;
+  while(cur < this.size()){
+    if(current.getData() == value){
+      in = true;
+    }
+    current = current.next();
+    cur++;
+  }
+  return in;
+}
+
 
 
 }
@@ -128,5 +147,11 @@ class Driver{
    lst.add(9);
    lst.add(10);
    System.out.println(lst);
+   System.out.println(lst.get(1));
+   System.out.println(lst.set(1, 4));
+   System.out.println(lst.get(1));
+   System.out.println(lst.size());
+   System.out.println(lst.contains(4));
+   System.out.println(lst.contains(10));
  }
 }
