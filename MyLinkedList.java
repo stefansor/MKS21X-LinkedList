@@ -125,10 +125,16 @@ class MyLinkedList{
  }
 
  public Integer get(int index){
+   if(index < 0 || index >= this.size()){
+     throw new IndexOutOfBoundsException("Index is out of bounds");
+   }
    return this.getnthNode(index).getData();
  }
 
  public Integer set(int index, Integer value){
+   if(index < 0 || index >= this.size()){
+     throw new IndexOutOfBoundsException("Index is out of bounds");
+   }
   Integer ol = this.getnthNode(index).getData();//saves old value of node
   this.getnthNode(index).setData(value);//changes value of node
   return ol;//returns old value
@@ -162,6 +168,9 @@ public int indexOf(Integer value){
 }
 
 public void add(int index, Integer value){
+  if(index < 0 || index >= this.size()){
+    throw new IndexOutOfBoundsException("Index is out of bounds");
+  }
   Node addnod = new Node(value);//new node to add with value
   if(index == 0){//start case is unique to any other case
     this.start.setPrev(addnod);
@@ -182,6 +191,9 @@ public void add(int index, Integer value){
 
 
 public Integer remove(int index){
+  if(index < 0 || index >= this.size()){
+    throw new IndexOutOfBoundsException("Index is out of bounds");
+  }
   Node removee = this.getnthNode(index);
   if(index == 0){
     Integer ol = this.start.getData();
