@@ -103,6 +103,20 @@ class MyLinkedList{
   return str;
  }
 
+ private Node getnthNode(int index){
+   int cur = 0;
+   Node current = this.start;
+   while(cur != index){
+     current = current.next();
+     cur++;
+   }
+   return current;
+ }
+
+ public Integer get(int index){
+   return this.getnthNode(index).getData();
+ }
+
 
 }
 
