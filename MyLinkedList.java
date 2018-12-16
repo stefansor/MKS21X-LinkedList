@@ -212,7 +212,8 @@ public Integer remove(int index){
 
 public boolean remove(Integer value){
   if(this.contains(value)){
-    this.remove(this.indexOf(value));
+    int removal = this.indexOf(value);
+    this.remove(removal);
     return true;
   }
   return false;
@@ -266,7 +267,7 @@ class Driver{
       System.out.println("#####################################");
       System.out.println("##Remove a Value by its Value Test:##");
       System.out.println("#####################################");
-      list.remove(new Integer(9));
+      list.remove((Integer)9);
       System.out.println(list);
       System.out.println("This should print: \"[0, 1, 2, 3, 4, 5, 6, 7, 8]\"");
 
@@ -376,13 +377,24 @@ class Driver{
       System.out.println("This should print: [1, 2, 3, 4, 5, 6, 7]\n");
 
       System.out.println("Adding to Last Element:");
-      list.add(7, new Integer(8));
+      list.add((Integer)8);
       System.out.println(list);
       System.out.println("This should print: [1, 2, 3, 4, 5, 6, 7, 8]\n");
 
       System.out.println("Adding to First Element:");
-      list.add(0, new Integer(666));
+      list.add(0, (Integer)666);
       System.out.println(list);
       System.out.println("This should print: [666, 1, 2, 3, 4, 5, 6, 7, 8]\n");
+      MyLinkedList lst = new MyLinkedList();
+      lst.add((Integer)4);
+      lst.add((Integer)5);
+      lst.add((Integer)6);
+      System.out.println(lst);
+      System.out.println(lst.contains(5));
+      System.out.println(lst.indexOf(5));
+      System.out.println(lst.remove((Integer)5));
+      System.out.println(lst);
+      lst.remove(0);
+      System.out.println(lst);
   }
 }
