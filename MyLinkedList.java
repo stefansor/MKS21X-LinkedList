@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 class Node{
  private Integer data;
  private Node next,prev;
@@ -237,176 +239,699 @@ public boolean remove(Integer value){
 
 class Driver{
   public static void main(String[] args) {
-      //What's poppin' everybody, welcome to my driver, we chill here in the code house
-      //Let's test this class and get this bread
 
-      //Step One: Creating a valid Instance
-      System.out.println("######################");
-      System.out.println("##New Instance Test:##");
-      System.out.println("######################");
-      MyLinkedList list = new MyLinkedList();
-      System.out.println(list);
-      System.out.println("This should print: \"[]\"\n");
+    System.out.println("MAIN MENU:");
+    System.out.println("[1] STANDARD");
+    System.out.println("[2] DEBUGGER");
+    System.out.println("[3] QUIT\n");
 
-      //Step Two: Let's add some values
-      System.out.println("#######################");
-      System.out.println("##Adding Values Test:##");
-      System.out.println("#######################");
-      for(int i = 0; i < 10; i++) {
-          list.add(i);
-          //System.out.println(list.size()); <- Debugging
-      }
-      System.out.println(list);
-      System.out.println("This should print: \"[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]\"");
+    Scanner sc = new Scanner(System.in);
+    System.out.print("input: ");
 
-      //Step Three: Adding a value to the middle
-      System.out.println("#####################################");
-      System.out.println("##Adding Values in the Middle Test:##");
-      System.out.println("#####################################");
-      list.add(5, 999);
-      System.out.println(list);
-      System.out.println("This should print: \"[0, 1, 2, 3, 4, 999, 5, 6, 7, 8, 9]\"");
+    int input = sc.nextInt();
 
-      //Step Four: Removing a value from the list by index
-      System.out.println("##########################");
-      System.out.println("##Removing a Value Test:##");
-      System.out.println("##########################");
-      list.remove(5);
-      System.out.println(list);
-      System.out.println("This should print: \"[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]\"");
+    switch(input) {
+      case 1:
+        // construct new, empty LinkedList
+        System.out.println("\nMyLinkedList test_case = new MyLinkedList();");
+        MyLinkedList test_case = new MyLinkedList();
 
-      //Step Five: Remove a value from the list by value
-      System.out.println("#####################################");
-      System.out.println("##Remove a Value by its Value Test:##");
-      System.out.println("#####################################");
-      list.remove((Integer)9);
-      System.out.println(list);
-      System.out.println("This should print: \"[0, 1, 2, 3, 4, 5, 6, 7, 8]\"");
+        // continue
+        System.out.println("[.]+[ENTER] to run diagnostics");
+        String cont = sc.next();
 
-      //Step Six: Testing the Contains Method
-      System.out.println("##############################");
-      System.out.println("##Checking Containment Test:##");
-      System.out.println("##############################");
-      System.out.println(list.contains(new Integer(999)));
-      System.out.println("This should print: false");
+        // LinkedList constructor diagnostics
+        // check initial size()
+        System.out.print("// ");
+        if(test_case.size() == 0) {
+          System.out.println("PASS");
+          System.out.println("   test_case.size() == 0");
+        } else {
+          System.out.println("FAIL");
+          System.out.println("   test_case.size() != 0");
+        }
 
-      //Step Seven: Testing the Size Method
-      System.out.println("##############");
-      System.out.println("##Size Test:##");
-      System.out.println("##############");
-      System.out.println(list.size());
-      System.out.println("This should print: 9");
+        // check toString() against expected
+        System.out.print("// ");
+        if(test_case.toString().equals("[]")) {
+          System.out.println("PASS");
+        } else {
+          System.out.println("FAIL");
+        }
+        System.out.println("   expected: []");
+        System.out.println("   actual:   " + test_case);
 
-      //Step Eight: indexOf Method
-      System.out.println("########################");
-      System.out.println("##Index of Value Test:##");
-      System.out.println("########################");
-      System.out.println(list.indexOf(0));
-      System.out.println("This should print: 0");
+        // --------------------------------------------------
 
-      //Step Nine: Exception Testing
-      System.out.println("######################");
-      System.out.println("##Exception Testing:##");
-      System.out.println("######################");
-      try {
-          list.remove(-1);
-      } catch(IndexOutOfBoundsException B) {
-          System.out.println("Removing a negative index throws the correct exception");
-      } catch(Exception e) {
-          System.out.println("Incorrect Exception Thrown:");
-          e.printStackTrace();
-      }
-      try {
-          list.remove(9000);
-      } catch(IndexOutOfBoundsException B) {
-          System.out.println("Removing an oversized index throws the correct exception");
-      } catch(Exception e) {
-          System.out.println("Incorrect Exception Thrown:");
-          e.printStackTrace();
-      }
-      try {
-          list.add(-1, new Integer(9));
-      } catch(IndexOutOfBoundsException B) {
-          System.out.println("Adding to a negative index throws the correct exception");
-      } catch(Exception e) {
-          System.out.println("Incorrect Exception Thrown:");
-          e.printStackTrace();
-      }
-      try {
-          list.add(90000, new Integer(69));
-      } catch(IndexOutOfBoundsException B) {
-          System.out.println("Adding to an oversized index throws the correct exception");
-      } catch(Exception e) {
-          System.out.println("Incorrect Exception Thrown:");
-          e.printStackTrace();
-      }
-      try {
-          list.set(-1, new Integer(9));
-      } catch(IndexOutOfBoundsException B) {
-          System.out.println("Setting a negative index throws the correct exception");
-      } catch(Exception e) {
-          System.out.println("Incorrect Exception Thrown:");
-          e.printStackTrace();
-      }
-      try {
-          list.set(90000, new Integer(69));
-      } catch(IndexOutOfBoundsException B) {
-          System.out.println("Setting an oversized index throws the correct exception");
-      } catch(Exception e) {
-          System.out.println("Incorrect Exception Thrown:");
-          e.printStackTrace();
-      }
-      try {
-          list.get(-1);
-      } catch(IndexOutOfBoundsException B) {
-          System.out.println("Getting a negative index throws the correct exception");
-      } catch(Exception e) {
-          System.out.println("Incorrect Exception Thrown:");
-          e.printStackTrace();
-      }
-      try {
-          list.get(90000);
-      } catch(IndexOutOfBoundsException B) {
-          System.out.println("Getting an oversized index throws the correct exception");
-      } catch(Exception e) {
-          System.out.println("Incorrect Exception Thrown:");
-          e.printStackTrace();
-      }
+        // continue
+        System.out.println("\n[.]+[ENTER] to test add(Integer value)");
+        cont = sc.next();
 
-      //Step 10: Edge Case Testing
-      System.out.println("######################");
-      System.out.println("##Edge-Case Testing:##");
-      System.out.println("######################\n");
+        // add(Integer value) values to test_case
+        System.out.println("test_case.add(1)");
+        System.out.println("test_case.add(2)");
+        test_case.add(1);
+        test_case.add(2);
 
-      System.out.println("Removing Last Element:");
-      list.remove(8);
-      System.out.println(list);
-      System.out.println("This should print: [0, 1, 2, 3, 4, 5, 6, 7]\n");
+        // continue
+        System.out.println("\n[.]+[ENTER] to run diagnostics");
+        cont = sc.next();
 
-      System.out.println("Removing First Element:");
-      list.remove(0);
-      System.out.println(list);
-      System.out.println("This should print: [1, 2, 3, 4, 5, 6, 7]\n");
+        // LinkedList add(Integer value) diagnostics
+        // check size()
+        System.out.print("// ");
+        if(test_case.size() == 2) {
+          System.out.println("PASS");
+          System.out.println("  test_case.size() == 2");
+        } else {
+          System.out.println("FAIL");
+          System.out.println("  test_case.size() != 2");
+        }
 
-      System.out.println("Adding to Last Element:");
-      list.add((Integer)8);
-      System.out.println(list);
-      System.out.println("This should print: [1, 2, 3, 4, 5, 6, 7, 8]\n");
+        // check toString() against expected
+        System.out.print("// ");
 
-      System.out.println("Adding to First Element:");
-      list.add(0, (Integer)666);
-      System.out.println(list);
-      System.out.println("This should print: [666, 1, 2, 3, 4, 5, 6, 7, 8]\n");
-      MyLinkedList lst = new MyLinkedList();
-      lst.add((Integer)4);
-      lst.add((Integer)5);
-      lst.add((Integer)6);
-      System.out.println(lst);
-      System.out.println(lst.contains(5));
-      System.out.println(lst.indexOf(5));
-      System.out.println(lst.remove((Integer)5));
-      System.out.println(lst);
-      lst.remove(0);
-      System.out.println(lst);
+        if(test_case.toString().equals("[1, 2]")) {
+          System.out.println("PASS");
+        } else {
+          System.out.println("FAIL");
+        }
+        System.out.println("  expected: [1, 2]");
+        System.out.println("  actual:   " + test_case);
+
+        // continue
+        System.out.println("\n[.]+[ENTER] to test add(Integer value)");
+        cont = sc.next();
+
+        // add(Integer value) values to test_case
+        System.out.println("test_case.add(-4)");
+        System.out.println("test_case.add(-7)");
+        test_case.add(-4);
+        test_case.add(-7);
+
+        // continue
+        System.out.println("\n[.]+[ENTER] to run diagnostics");
+        cont = sc.next();
+
+        // LinkedList add(Integer value) diagnostics
+        // check size()
+        System.out.print("// ");
+        if(test_case.size() == 4) {
+          System.out.println("PASS");
+          System.out.println("  test_case.size() == 4");
+        } else {
+          System.out.println("FAIL");
+          System.out.println("  test_case.size() != 4");
+        }
+
+        // check toString() against expected
+        System.out.print("// ");
+
+        if(test_case.toString().equals("[1, 2, -4, -7]")) {
+          System.out.println("PASS");
+        } else {
+          System.out.println("FAIL");
+        }
+        System.out.println("  expected: [1, 2, -4, -7]");
+        System.out.println("  actual:   " + test_case);
+
+        // continue
+        System.out.println("\n[.]+[ENTER] to test add(int index, Integer value)");
+        cont = sc.next();
+
+        // add(int index, Integer value) values to test_case
+        System.out.println("test_case.add(3, -9)");
+        test_case.add(3, -9);
+
+        // continue
+        System.out.println("\n[.]+[ENTER] to run diagnostics");
+        cont = sc.next();
+
+        // LinkedList add(int index, Integer value) diagnostics
+        // check size()
+        System.out.print("// ");
+        if(test_case.size() == 5) {
+          System.out.println("PASS");
+          System.out.println("  test_case.size() == 5");
+        } else {
+          System.out.println("FAIL");
+          System.out.println("  test_case.size() != 5");
+        }
+
+        // check toString() against expected
+        System.out.print("// ");
+
+        if(test_case.toString().equals("[1, 2, -4, -9, -7]")) {
+          System.out.println("PASS");
+        } else {
+          System.out.println("FAIL");
+        }
+        System.out.println("  expected: [1, 2, -4, -9, -7]");
+        System.out.println("  actual:   " + test_case);
+
+        // continue
+        System.out.println("\n[.]+[ENTER] to test add(int index, Integer value)");
+        cont = sc.next();
+
+        // add(int index, Integer value) values to test_case
+        System.out.println("test_case.add(0, -5)");
+        test_case.add(0, -5);
+
+        // continue
+        System.out.println("\n[.]+[ENTER] to run diagnostics");
+        cont = sc.next();
+
+        // LinkedList add(int index, Integer value) diagnostics
+        // check size()
+        System.out.print("// ");
+        if(test_case.size() == 6) {
+          System.out.println("PASS");
+          System.out.println("  test_case.size() == 6");
+        } else {
+          System.out.println("FAIL");
+          System.out.println("  test_case.size() != 6");
+        }
+
+        // check toString() against expected
+        System.out.print("// ");
+
+        if(test_case.toString().equals("[-5, 1, 2, -4, -9, -7]")) {
+          System.out.println("PASS");
+        } else {
+          System.out.println("FAIL");
+        }
+        System.out.println("  expected: [-5, 1, 2, -4, -9, -7]");
+        System.out.println("  actual:   " + test_case);
+
+        // continue
+        System.out.println("\n[.]+[ENTER] to test negative EXCEPTIONS add(int index, Integer value)");
+        cont = sc.next();
+
+        // add(int index, Integer value) EXCEPTIONS values to test_case
+        System.out.println("test_case.add(-1, 10)");
+
+        try {
+          test_case.add(-1, 10);
+        } catch(IndexOutOfBoundsException e) {
+          System.out.println("// INDEX_EXCEPTION : given index exceeds bounds, negative EXCEPTION");
+        }
+
+        // continue
+        System.out.println("\n[.]+[ENTER] to run diagnostics");
+        cont = sc.next();
+
+        // LinkedList add(int index, Integer value) diagnostics
+        // check size()
+        System.out.print("// ");
+        if(test_case.size() == 6) {
+          System.out.println("PASS");
+          System.out.println("  test_case.size() == 6");
+        } else {
+          System.out.println("FAIL");
+          System.out.println("  test_case.size() != 6");
+        }
+
+        // check toString() against expected
+        System.out.print("// ");
+
+        if(test_case.toString().equals("[-5, 1, 2, -4, -9, -7]")) {
+          System.out.println("PASS");
+        } else {
+          System.out.println("FAIL");
+        }
+        System.out.println("  expected: [-5, 1, 2, -4, -9, -7]");
+        System.out.println("  actual:   " + test_case);
+
+        // continue
+        System.out.println("\n[.]+[ENTER] to test overflow EXCEPTIONS add(int index, Integer value)");
+        cont = sc.next();
+
+        // add(int index, Integer value) EXCEPTIONS values to test_case
+        System.out.println("test_case.add(7, 10)");
+
+        try {
+          test_case.add(7, 10);
+        } catch(IndexOutOfBoundsException e) {
+          System.out.println("// INDEX_EXCEPTION : given index exceeds bounds, overflow EXCEPTION");
+        }
+
+        // continue
+        System.out.println("\n[.]+[ENTER] to run diagnostics");
+        cont = sc.next();
+
+        // LinkedList add(int index, Integer value) diagnostics
+        // check size()
+        System.out.print("// ");
+        if(test_case.size() == 6) {
+          System.out.println("PASS");
+          System.out.println("  test_case.size() == 6");
+        } else {
+          System.out.println("FAIL");
+          System.out.println("  test_case.size() != 6");
+        }
+
+        // check toString() against expected
+        System.out.print("// ");
+
+        if(test_case.toString().equals("[-5, 1, 2, -4, -9, -7]")) {
+          System.out.println("PASS");
+        } else {
+          System.out.println("FAIL");
+        }
+        System.out.println("  expected: [-5, 1, 2, -4, -9, -7]");
+        System.out.println("  actual:   " + test_case);
+
+        // --------------------------------------------------
+
+        // continue
+        System.out.println("\n[.]+[ENTER] to test get(Index)");
+        cont = sc.next();
+
+        // get(int index) values from test_case
+        System.out.println("test_case.get(0)");
+
+        System.out.print("// ");
+        if(test_case.get(0) == -5) {
+          System.out.println("PASS");
+        } else {
+          System.out.println("FAIL");
+        }
+
+        System.out.println("  expected: -5");
+        System.out.println("  actual:   " + test_case.get(0));
+
+        System.out.println();
+        System.out.println("test_case.get(0)");
+
+        System.out.print("// ");
+        if(test_case.get(5) == -7) {
+          System.out.println("PASS");
+        } else {
+          System.out.println("FAIL");
+        }
+
+        System.out.println("  expected: -7");
+        System.out.println("  actual:   " + test_case.get(5));
+
+        System.out.println();
+        System.out.println("test_case.get(0)");
+
+        System.out.print("// ");
+        if(test_case.get(4) == -9) {
+          System.out.println("PASS");
+        } else {
+          System.out.println("FAIL");
+        }
+
+        System.out.println("  expected: -9");
+        System.out.println("  actual:   " + test_case.get(4));
+
+        // continue
+        System.out.println("\n[.]+[ENTER] to test negative EXCEPTIONS get(int index)");
+        cont = sc.next();
+
+        try {
+          test_case.get(-1);
+        } catch ( IndexOutOfBoundsException e) {
+          System.out.println("// INDEX_EXCEPTION : given index exceeds bounds, negative EXCEPTION");
+        }
+
+        // continue
+        System.out.println("\n[.]+[ENTER] to test overflow EXCEPTIONS get(int index)");
+        cont = sc.next();
+
+        try {
+          test_case.get(7);
+        } catch (IndexOutOfBoundsException e) {
+          System.out.println("// INDEX_EXCEPTION: given index exceeds bounds, overflow EXCEPTION");
+        }
+
+        // --------------------------------------------------
+
+        // continue
+        System.out.println("\n[.]+[ENTER] to test set(int index, Integer value)");
+        cont = sc.next();
+
+        // set(int index, Integer value) values in test_case
+        System.out.println("test_case.set(0, -4)");
+
+        Integer t = test_case.set(0, -4);
+
+        System.out.print("// ");
+        if(t.equals(-5)) {
+          System.out.println("PASS");
+        } else {
+          System.out.println("FAIL");
+        }
+
+        System.out.println("  expected: -5");
+        System.out.println("  actual:   " + t);
+
+        System.out.println();
+        System.out.println("test_case.set(1, 0)");
+
+        t = test_case.set(1, 0);
+
+        System.out.print("// ");
+        if(t.equals(1)) {
+          System.out.println("PASS");
+        } else {
+          System.out.println("FAIL");
+        }
+
+        System.out.println("  expected: 1");
+        System.out.println("  actual:   " + t);
+
+        System.out.println();
+        System.out.println("test_case.set(5, -9)");
+
+        t = test_case.set(5, -9);
+
+        System.out.print("// ");
+        if(t.equals(-7)) {
+          System.out.println("PASS");
+        } else {
+          System.out.println("FAIL");
+        }
+
+        System.out.println("  expected: -7");
+        System.out.println("  actual:   " + t);
+
+        // continue
+        System.out.println("\n[.]+[ENTER] to test negative EXCEPTIONS set(int index, Integer value)");
+        cont = sc.next();
+
+        try {
+          test_case.set(-1, 0);
+        } catch ( IndexOutOfBoundsException e) {
+          System.out.println("// INDEX_EXCEPTION : given index exceeds bounds, negative EXCEPTION");
+        }
+
+        // continue
+        System.out.println("\n[.]+[ENTER] to test overflow EXCEPTIONS get(int index)");
+        cont = sc.next();
+
+        try {
+          test_case.set(7, 0);
+        } catch (IndexOutOfBoundsException e) {
+          System.out.println("// INDEX_EXCEPTION: given index exceeds bounds, overflow EXCEPTION");
+        }
+
+        // continue
+        System.out.println("\n[.]+[ENTER] to run diagnostics");
+        cont = sc.next();
+
+        // LinkedList set(int index, Integer value) diagnostics
+        // check size()
+        System.out.print("// ");
+        if(test_case.size() == 6) {
+          System.out.println("PASS");
+          System.out.println("  test_case.size() == 6");
+        } else {
+          System.out.println("FAIL");
+          System.out.println("  test_case.size() != 6");
+        }
+
+        // check toString() against expected
+        System.out.print("// ");
+
+        if(test_case.toString().equals("[-4, 0, 2, -4, -9, -9]")) {
+          System.out.println("PASS");
+        } else {
+          System.out.println("FAIL");
+        }
+        System.out.println("  expected: [-4, 0, 2, -4, -9, -9]");
+        System.out.println("  actual:   " + test_case);
+
+        // --------------------------------------------------
+
+        // continue
+        System.out.println("\n[.]+[ENTER] to test contains(Integer value)");
+        cont = sc.next();
+
+        // set(int index, Integer value) values in test_case
+        System.out.println("test_case.contains(-4)");
+
+        boolean inclusive = test_case.contains(-4);
+
+        System.out.print("// ");
+        if(inclusive) {
+          System.out.println("PASS");
+        } else {
+          System.out.println("FAIL");
+        }
+
+        System.out.println("  expected: true");
+        System.out.println("  actual:   " + inclusive);
+
+        System.out.println();
+        System.out.println("test_case.contains(-9)");
+
+        inclusive = test_case.contains(-9);
+
+        System.out.print("// ");
+        if(inclusive) {
+          System.out.println("PASS");
+        } else {
+          System.out.println("FAIL");
+        }
+
+        System.out.println("  expected: true");
+        System.out.println("  actual:   " + inclusive);
+
+        System.out.println();
+        System.out.println("test_case.contains(2)");
+
+        inclusive = test_case.contains(2);
+
+        System.out.print("// ");
+        if(inclusive) {
+          System.out.println("PASS");
+        } else {
+          System.out.println("FAIL");
+        }
+
+        System.out.println("  expected: true");
+        System.out.println("  actual:   " + inclusive);
+
+        System.out.println();
+        System.out.println("test_case.contains(14)");
+
+        inclusive = test_case.contains(14);
+
+        System.out.print("// ");
+        if(!(inclusive)) {
+          System.out.println("PASS");
+        } else {
+          System.out.println("FAIL");
+        }
+
+        System.out.println("  expected: false");
+        System.out.println("  actual:   " + inclusive);
+
+        // --------------------------------------------------
+
+        // continue
+        System.out.println("\n[.]+[ENTER] to test indexOf(Integer value)");
+        cont = sc.next();
+
+        // indexOf(Integer value) values in test_case
+        System.out.println("test_case.indexOf(-4)");
+
+        t = test_case.indexOf(-4);
+
+        System.out.print("// ");
+        if(t == 0) {
+          System.out.println("PASS");
+        } else {
+          System.out.println("FAIL");
+        }
+
+        System.out.println("  expected: 0");
+        System.out.println("  actual:   " + t);
+
+        System.out.println();
+        System.out.println("test_case.indexOf(-9)");
+
+        t = test_case.indexOf(-9);
+
+        System.out.print("// ");
+        if(t == 4) {
+          System.out.println("PASS");
+        } else {
+          System.out.println("FAIL");
+        }
+
+        System.out.println("  expected: 4");
+        System.out.println("  actual:   " + t);
+
+        System.out.println();
+        System.out.println("test_case.contains(2)");
+
+        t = test_case.indexOf(2);
+
+        System.out.print("// ");
+        if(t == 2) {
+          System.out.println("PASS");
+        } else {
+          System.out.println("FAIL");
+        }
+
+        System.out.println("  expected: 2");
+        System.out.println("  actual:   " + t);
+
+        System.out.println();
+        System.out.println("test_case.indexOf(14)");
+
+        t = test_case.indexOf(14);
+
+        System.out.print("// ");
+        if(t == -1) {
+          System.out.println("PASS");
+        } else {
+          System.out.println("FAIL");
+        }
+
+        System.out.println("  expected: -1");
+        System.out.println("  actual:   " + t);
+
+        // --------------------------------------------------
+
+        // continue
+        System.out.println("\n[.]+[ENTER] to test remove(int index)");
+        cont = sc.next();
+
+        // remove(int index) values from test_case
+        System.out.println("test_case.remove(2)");
+
+        Integer pop = test_case.remove(2);
+
+        System.out.print("// ");
+        if(pop.equals(2)) {
+          System.out.println("PASS");
+        } else {
+          System.out.println("FAIL");
+        }
+
+        System.out.println("  expected: 2");
+        System.out.println("  actual:   " + pop);
+
+        System.out.println();
+        System.out.println("test_case.remove(2)");
+
+        pop = test_case.remove(2);
+
+        System.out.print("// ");
+        if(pop.equals(-4)) {
+          System.out.println("PASS");
+        } else {
+          System.out.println("FAIL");
+        }
+
+        System.out.println("  expected: -4");
+        System.out.println("  actual:   " + pop);
+
+        System.out.println();
+        System.out.println("test_case.remove(0)");
+
+        pop = test_case.remove(0);
+
+        System.out.print("// ");
+        if(pop.equals(-4)) {
+          System.out.println("PASS");
+        } else {
+          System.out.println("FAIL");
+        }
+
+        System.out.println("  expected: -4");
+        System.out.println("  actual:   " + pop);
+
+        // continue
+        System.out.println("\n[.]+[ENTER] to run diagnostics");
+        cont = sc.next();
+
+        // LinkedList remove(int index) diagnostics
+        // check size()
+        System.out.print("// ");
+        if(test_case.size() == 3) {
+          System.out.println("PASS");
+          System.out.println("  test_case.size() == 3");
+        } else {
+          System.out.println("FAIL");
+          System.out.println("  test_case.size() != 3");
+        }
+
+        // check toString() against expected
+        System.out.print("// ");
+
+        if(test_case.toString().equals("[0, -9, -9]")) {
+          System.out.println("PASS");
+        } else {
+          System.out.println("FAIL");
+        }
+        System.out.println("  expected: [0, -9, -9]");
+        System.out.println("  actual:   " + test_case);
+
+        // continue
+        System.out.println("\n[.]+[ENTER] to test negative EXCEPTIONS remove(int index)");
+        cont = sc.next();
+
+        try {
+          test_case.remove(-1);
+        } catch ( IndexOutOfBoundsException e) {
+          System.out.println("// INDEX_EXCEPTION : given index exceeds bounds, negative EXCEPTION");
+        }
+
+        // continue
+        System.out.println("\n[.]+[ENTER] to test overflow EXCEPTIONS remove(int index)");
+        cont = sc.next();
+
+        try {
+          test_case.remove(7);
+        } catch (IndexOutOfBoundsException e) {
+          System.out.println("// INDEX_EXCEPTION: given index exceeds bounds, overflow EXCEPTION");
+        }
+
+        // continue
+        System.out.println("\n[.]+[ENTER] to run diagnostics");
+        cont = sc.next();
+
+        // LinkedList remove(int index) diagnostics
+        // check size()
+        System.out.print("// ");
+        if(test_case.size() == 3) {
+          System.out.println("PASS");
+          System.out.println("  test_case.size() == 3");
+        } else {
+          System.out.println("FAIL");
+          System.out.println("  test_case.size() != 3");
+        }
+
+        // check toString() against expected
+        System.out.print("// ");
+
+        if(test_case.toString().equals("[0, -9, -9]")) {
+          System.out.println("PASS");
+        } else {
+          System.out.println("FAIL");
+        }
+        System.out.println("  expected: [0, -9, -9]");
+        System.out.println("  actual:   " + test_case);
+
+        // --------------------------------------------------
+
+        // ?
+
+        break;
+      case 2:
+        // ?
+        break;
+      case 3:
+        System.out.println("How could you leave me like this");
+        System.exit(0);
+        break;
+      default:
+        // ?
+    }
   }
 }
